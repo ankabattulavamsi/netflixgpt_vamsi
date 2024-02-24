@@ -13,7 +13,6 @@ const useTopRatedMovies = () => {
     );
 
     const data = await fetchNowPlayingMoviesList.json();
-    console.log("22222", data);
     dispatch(topRatedMovies(data?.results));
   };
 

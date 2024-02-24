@@ -8,12 +8,11 @@ const useUpcomingMovies = () => {
 
   const nweMovies = async () => {
     const fetchNowPlayingMoviesList = await fetch(
-      "https://api.themoviedb.org/3/movie/upcoming",
+      "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
       options
     );
 
     const data = await fetchNowPlayingMoviesList.json();
-    console.log("22222", data);
     dispatch(upComingMovies(data?.results));
   };
 

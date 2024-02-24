@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
 import { addUser, removeUser } from "../utils/userSlice";
-import { Netflix_Logo } from "../utils/constants";
+import { Netflix_Logo, SUPPORTED_LANGUAGES } from "../utils/constants";
+import { toggleGptSearchPage } from "../utils/gptSlice";
+import { changeLanguage } from "../utils/langSlice";
 
 const Header = () => {
   const user = useSelector((store: any) => store?.user);
+  const showGptSearch = useSelector((store: any) => store?.gpt.showGptSearch);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickhandleSignOut = () => {
@@ -45,12 +48,38 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
 
+  const handleGptSearchPage = () => {
+    dispatch(toggleGptSearchPage());
+  };
+
+  const handleSelectLan = (e: any) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
       <img className="w-36 mx-auto md:mx-0" src={Netflix_Logo} alt="img-logo" />
 
       {user && (
         <div className="flex  items-center">
+          {!showGptSearch && (
+            <select
+              onChange={handleSelectLan}
+              className="mr-4 p-2 m-2 bg-gray-900 text-white"
+            >
+              {SUPPORTED_LANGUAGES.map((language: any) => (
+                <option key={language.identifier} value={language.identifier}>
+                  {language.name}
+                </option>
+              ))}
+            </select>
+          )}
+          <button
+            className="bg-red-600 text-white py-2 px-4 rounded-lg mr-4 "
+            onClick={handleGptSearchPage}
+          >
+            {showGptSearch ? "Gpt Search" : "Home"}
+          </button>
           <img
             src={user?.photoURL}
             alt="image-photo"
