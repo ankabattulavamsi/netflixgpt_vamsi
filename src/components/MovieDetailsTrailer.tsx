@@ -14,7 +14,7 @@ const MovieDetailsTrailer = () => {
   const movieDetails = movies[1];
   const { original_title, overview, id } = movieDetails;
   return (
-    <div>
+    <div className="pt-[30%] bg-black md:pt-0">
       <MovieTitleAndDetails title={original_title} review={overview} />
       <MovieVideoBackground movieId={id} />
     </div>

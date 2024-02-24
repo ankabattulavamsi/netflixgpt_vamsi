@@ -7,7 +7,11 @@ const GptSearchPage = () => {
   return (
     <div>
       <div className="fixed -z-10">
-        <img className="" src={Background_Image_URL} alt="backgroun-image" />
+        <img
+          className="h-screen object-cover"
+          src={Background_Image_URL}
+          alt="backgroun-image"
+        />
       </div>
       <div>
         <SearchBarGpt />
