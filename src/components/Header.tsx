@@ -10,7 +10,7 @@ import { changeLanguage } from "../utils/langSlice";
 
 const Header = () => {
   const user = useSelector((store: any) => store?.user);
-  const showGptSearch = useSelector((store: any) => store?.gpt.showGptSearch);
+  const showGptSearch = useSelector((store: any) => store?.gpt?.showGptSearch);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickhandleSignOut = () => {
@@ -63,10 +63,10 @@ const Header = () => {
       {user && (
         <div className="-mx-5 md:mx-0  flex  justify-between items-center md:items-center ">
           <div>
-            {!showGptSearch && (
+            {showGptSearch && (
               <select
                 onChange={handleSelectLan}
-                className="mr-4 p-2 m-2 bg-gray-900 text-white"
+                className="mr-4 p-2 m-2 bg-gray-900 text-white rounded-lg"
               >
                 {SUPPORTED_LANGUAGES.map((language: any) => (
                   <option key={language.identifier} value={language.identifier}>
@@ -80,7 +80,7 @@ const Header = () => {
             className="bg-red-600 text-white py-2 px-4 rounded-lg mr-4 "
             onClick={handleGptSearchPage}
           >
-            {showGptSearch ? "Gpt Search" : "Home"}
+            {showGptSearch ? "Homepage" : "GPT Search"}
           </button>
           <img
             src={user?.photoURL}

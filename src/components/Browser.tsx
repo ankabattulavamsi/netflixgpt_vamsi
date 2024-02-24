@@ -13,12 +13,12 @@ const Browser = () => {
     <div>
       <Header />
       {showGptSearch ? (
+        <GptSearchPage />
+      ) : (
         <>
           <MovieDetailsTrailer />
           <ListOfmovies />
         </>
-      ) : (
-        <GptSearchPage />
       )}
 
       {/* 

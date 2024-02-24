@@ -1,11 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/LanguageConstants";
 import openai from "../utils/openai";
 import { options } from "../utils/constants";
 import { getMoviesResult } from "../utils/gptSlice";
+import Spinner from "./Spinner";
 
 const SearchBarGpt = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const searchText: any = useRef(null);
   const langKey: any = useSelector((state: any) => state?.language?.lang);
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ const SearchBarGpt = () => {
   };
 
   const handleSearchMoviesWithLanguage = async () => {
+    setIsLoading(true);
     const gptQuery =
       "Act as a Movie Recommendation system and suggest some movies for the query : " +
       searchText.current.value +
@@ -45,6 +48,7 @@ const SearchBarGpt = () => {
         moviesResult: promiseResolve,
       })
     );
+    setIsLoading(false);
   };
 
   return (
@@ -63,7 +67,7 @@ const SearchBarGpt = () => {
           onClick={handleSearchMoviesWithLanguage}
           className="col-span-3 bg-red-700 text-white m-2 p-4 rounded-lg -ml-1"
         >
-          {lang[langKey]?.search}
+          {isLoading ? <Spinner /> : <>{lang[langKey]?.search}</>}
         </button>
       </form>
     </div>

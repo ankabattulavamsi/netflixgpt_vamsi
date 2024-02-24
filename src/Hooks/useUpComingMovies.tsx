@@ -8,7 +8,6 @@ const useUpcomingMovies = () => {
   const upcomingMoviesList = useSelector(
     (state: any) => state?.movies?.NewMovies
   );
-  console.log("####", upcomingMoviesList);
   const nweMovies = async () => {
     const fetchNowPlayingMoviesList = await fetch(
       "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",

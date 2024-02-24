@@ -1,13 +1,14 @@
 import React from "react";
 import { Movie_Logo_URL } from "../utils/constants";
 
-const CardMovie = ({ posterPath }: any) => {
-  if (!posterPath) return null;
+const CardMovie = ({ movieAllDetails }: any) => {
+  console.log("movieAllDetails", movieAllDetails);
+  if (!movieAllDetails) return null;
   return (
-    <div className="w-32 md:w-42 pr-4">
+    <div className="w-40 md:w-50 cursor-pointer pr-4">
       <img
-        className="rounded-lg md:w-48 h-[100%] w-[100%] object-cover"
-        src={Movie_Logo_URL + posterPath}
+        className="translate-y-6 rounded-lg  object-cover"
+        src={Movie_Logo_URL + movieAllDetails}
         alt="movie_poster"
       />
     </div>
