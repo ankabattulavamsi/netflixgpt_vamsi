@@ -1,16 +1,18 @@
 import React from "react";
 import { Movie_Logo_URL } from "../utils/constants";
+import { Link } from "react-router-dom";
 
-const CardMovie = ({ movieAllDetails }: any) => {
-  console.log("movieAllDetails", movieAllDetails);
-  if (!movieAllDetails) return null;
+const CardMovie = ({ posterPath, id }: any) => {
+  if (!posterPath) return null;
   return (
-    <div className="w-40 md:w-50 cursor-pointer pr-4">
-      <img
-        className="translate-y-6 rounded-lg  object-cover"
-        src={Movie_Logo_URL + movieAllDetails}
-        alt="movie_poster"
-      />
+    <div className="w-44 md:w-50 cursor-pointer pr-4">
+      <Link to={`/browse/${id}`}>
+        <img
+          className="rounded-lg  object-cover"
+          src={Movie_Logo_URL + posterPath}
+          alt="movie_poster"
+        />
+      </Link>
     </div>
   );
 };

@@ -23,10 +23,11 @@ const useVideoTrailer = (movieId: any) => {
     const filterMovie = json?.results?.filter(
       (trailer: any) => trailer?.type == "Trailer"
     );
-    const movieTrailer = json?.results ? filterMovie[0] : json.results[0];
+    const movieTrailer = filterMovie.length ? filterMovie[0] : json.results[0];
 
     dispatch(movieTrailerPlay(movieTrailer));
   };
+  return videoTrailer;
 };
 
 export default useVideoTrailer;

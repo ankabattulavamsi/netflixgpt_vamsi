@@ -35,7 +35,7 @@ const Header = () => {
             photoURL: photoURL,
           })
         );
-        navigate("/browser");
+        navigate("/browse");
         // ...
       } else {
         // User is signed out

@@ -9,7 +9,11 @@ const CardsOfMovies = ({ title, moviesList }: any) => {
           {moviesList?.map((movie: any) => {
             return (
               <>
-                <CardMovie key={movie?.id} posterPath={movie?.poster_path} />
+                <CardMovie
+                  key={movie?.id}
+                  posterPath={movie?.poster_path}
+                  id={movie?.id}
+                />
               </>
             );
           })}
