@@ -65,6 +65,7 @@ const Header = () => {
           <div>
             {showGptSearch && (
               <select
+                // defaultValue={}
                 onChange={handleSelectLan}
                 className="mr-4 p-2 m-2 bg-gray-900 text-white rounded-lg"
               >
