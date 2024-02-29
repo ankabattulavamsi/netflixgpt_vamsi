@@ -1,14 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/LanguageConstants";
 import openai from "../utils/openai";
 import { options } from "../utils/constants";
 import { getMoviesResult } from "../utils/gptSlice";
 import Spinner from "./Spinner";
+import SearchSuggestion from "./SearchSuggestion";
+import { current } from "@reduxjs/toolkit";
 
 const SearchBarGpt = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const searchText: any = useRef(null);
+  const [suggestionList, setShowSuggestionList] = useState([]);
+  const [suggestionText, setSuggestionText] = useState<any>("");
+  // const searchText: any = useRef(null);
   const langKey: any = useSelector((state: any) => state?.language?.lang);
   const dispatch = useDispatch();
 
@@ -27,7 +31,7 @@ const SearchBarGpt = () => {
     setIsLoading(true);
     const gptQuery =
       "Act as a Movie Recommendation system and suggest some movies for the query : " +
-      searchText.current.value +
+      suggestionText +
       ". only give me names of 8 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
 
     const searchResult = await openai.chat.completions.create({
@@ -51,26 +55,68 @@ const SearchBarGpt = () => {
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    suggestionListData();
+  });
+
+  const suggestionListData = async () => {
+    const data = await fetch(
+      `http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${suggestionText}`
+    );
+    const json = await data.json();
+    setShowSuggestionList(json[1]);
+  };
+
+  const setSuggestionListInSearch = () => {
+    console.log("rendered");
+    // searchText.curerent.value;
+    setSuggestionText(suggestionText);
+  };
+
+  const handleChangeSuggestion = (e: any) => {
+    setSuggestionText(e.target.value);
+  };
+
   return (
-    <div className="pt-[35%] md:pt-[10%] flex justify-center ">
-      <form
-        className="w-full md:w-1/2 bg-black grid grid-cols-12 rounded-lg"
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <input
-          ref={searchText}
-          type="text"
-          className="col-span-9 p-4 m-2 rounded-lg"
-          placeholder={lang[langKey]?.placeholderSearch}
-        />
-        <button
-          onClick={handleSearchMoviesWithLanguage}
-          className="col-span-3 bg-red-700 text-white m-2 p-4 rounded-lg -ml-1"
+    <>
+      <div className="pt-[35%] md:pt-[10%] flex justify-center ">
+        <form
+          className="w-full md:w-1/2 bg-black grid grid-cols-12 rounded-lg"
+          onSubmit={(e) => e.preventDefault()}
         >
-          {isLoading ? <Spinner /> : <>{lang[langKey]?.search}</>}
-        </button>
-      </form>
-    </div>
+          <input
+            // ref={searchText}
+            value={suggestionText}
+            onChange={handleChangeSuggestion}
+            type="text"
+            className="col-span-9 p-4 m-2 rounded-lg"
+            placeholder={lang[langKey]?.placeholderSearch}
+          />
+          <button
+            onClick={handleSearchMoviesWithLanguage}
+            className="col-span-3 bg-red-700 text-white m-2 p-4 rounded-lg -ml-1"
+          >
+            {isLoading ? <Spinner /> : <>{lang[langKey]?.search}</>}
+          </button>
+        </form>
+      </div>
+
+      {suggestionList.length !== 0 && (
+        <div className="flex justify-center ">
+          <div
+            className="w-full md:w-1/2 bg-gray-500 px-2 py-2 rounded-b-lg 
+        "
+          >
+            {suggestionList?.map((suggestion: any) => (
+              <SearchSuggestion
+                suggestionName={suggestion}
+                listInSearch={setSuggestionListInSearch}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

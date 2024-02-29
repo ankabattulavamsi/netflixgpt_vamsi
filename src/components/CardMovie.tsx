@@ -19,7 +19,7 @@ const CardMovie = ({ posterPath, id, title, rating, relaseDate }: any) => {
                       bg-gray-900 group mr-4"
       >
         <div
-          className="absolute  transform 
+          className="absolute z-100 transform 
           transition duration-1000  group-hover:scale-x-125
                             w-full h-56 group-hover:opacity-90"
         >

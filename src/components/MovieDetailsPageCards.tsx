@@ -94,7 +94,6 @@ const MovieDetailsPageCards = () => {
           )}
         </div>
       </div>
-      <p>movie details</p>
     </div>
   );
 };

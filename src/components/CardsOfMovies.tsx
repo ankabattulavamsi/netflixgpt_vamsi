@@ -7,7 +7,6 @@ const CardsOfMovies = ({ title, moviesList }: any) => {
       <div className="flex overflow-x-scroll">
         <div className="flex">
           {moviesList?.map((movie: any) => {
-            console.log("movie-detail", movie);
             return (
               <CardMovie
                 key={movie?.id}
