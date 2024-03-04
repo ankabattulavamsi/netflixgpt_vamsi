@@ -16,7 +16,7 @@ const ListOfmovies = () => {
   return (
     movies.playingNowMoviesList && (
       <div className="bg-black">
-        <div className="mt-0 md:-mt-40 pl-4 md:pl-6 relative z-20">
+        <div className="mt-0 pl-4 md:pl-6 relative z-20">
           <CardsOfMovies
             title="Popular Movies"
             moviesList={movies?.popularMovies}

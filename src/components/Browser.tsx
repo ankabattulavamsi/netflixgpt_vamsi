@@ -6,10 +6,15 @@ import MovieDetailsTrailer from "./MovieDetailsTrailer";
 import GptSearchPage from "./GptSearchPage";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
+import SearchMovieResult from "./SearchMovieResult";
+import Schedule from "./scheduleComp/Schedule";
 
 const Browser = () => {
   usePlayingMoviesNow();
   const showGptSearch = useSelector((state: any) => state.gpt.showGptSearch);
+  const searchMovieResults = useSelector(
+    (state: any) => state.movies.searchMovieResult
+  );
 
   return (
     <div>
@@ -18,8 +23,15 @@ const Browser = () => {
         <GptSearchPage />
       ) : (
         <>
-          <MovieDetailsTrailer />
-          <ListOfmovies />
+          {searchMovieResults ? (
+            <SearchMovieResult />
+          ) : (
+            <>
+              <MovieDetailsTrailer />
+              <ListOfmovies />
+              <Schedule />
+            </>
+          )}
         </>
       )}
       <Footer />

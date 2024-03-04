@@ -25,4 +25,35 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "spanish", name: "Spanish" },
 ];
 
+export const MOVIES_API_KEY = "9a040b8257880218fbce5a15afd71a24";
+
 export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
+
+export const movieSearchAPI = "https://api.themoviedb.org/3/search/multi?";
+
+export const trendingSetApi = "https://api.themoviedb.org/3/trending/movie/";
+
+// "https://api.themoviedb.org/3/search/movie?query=hindi&api_key=";
+
+export const navItems = [
+  {
+    id: 1,
+    link: "#",
+    name: "Home",
+    active: true,
+  },
+
+  {
+    id: 2,
+    link: "#schedule",
+    name: "schedule",
+    active: true,
+  },
+
+  {
+    id: 1,
+    link: "#blogs",
+    name: "Blogs",
+    active: true,
+  },
+];

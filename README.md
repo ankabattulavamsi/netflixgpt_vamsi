@@ -46,7 +46,9 @@
 - Adding .env file to gitignore
 - Made our Site Responsive
 
----
+## --recamondation list with api must should add
+
+-- similar movies also i need to add
 
 - Features
 

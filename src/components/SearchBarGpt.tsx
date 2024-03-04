@@ -12,6 +12,7 @@ const SearchBarGpt = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [suggestionList, setShowSuggestionList] = useState([]);
   const [suggestionText, setSuggestionText] = useState<any>("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
   // const searchText: any = useRef(null);
   const langKey: any = useSelector((state: any) => state?.language?.lang);
   const dispatch = useDispatch();
@@ -28,7 +29,9 @@ const SearchBarGpt = () => {
   };
 
   const handleSearchMoviesWithLanguage = async () => {
+    setShowSuggestions(false);
     setIsLoading(true);
+
     const gptQuery =
       "Act as a Movie Recommendation system and suggest some movies for the query : " +
       suggestionText +
@@ -52,11 +55,14 @@ const SearchBarGpt = () => {
         moviesResult: promiseResolve,
       })
     );
+    setShowSuggestionList([]);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    suggestionListData();
+    setTimeout(() => {
+      suggestionListData();
+    }, 1500);
   });
 
   const suggestionListData = async () => {
@@ -67,10 +73,9 @@ const SearchBarGpt = () => {
     setShowSuggestionList(json[1]);
   };
 
-  const setSuggestionListInSearch = () => {
-    console.log("rendered");
+  const handleSelectSuggestion = (suggestion: any) => {
     // searchText.curerent.value;
-    setSuggestionText(suggestionText);
+    setSuggestionText(suggestion);
   };
 
   const handleChangeSuggestion = (e: any) => {
@@ -79,7 +84,10 @@ const SearchBarGpt = () => {
 
   return (
     <>
-      <div className="pt-[35%] md:pt-[10%] flex justify-center ">
+      <div
+        className="pt-[35%] md:pt-[10%] flex justify-center "
+        // onBlur={() => setShowSuggestions(false)}
+      >
         <form
           className="w-full md:w-1/2 bg-black grid grid-cols-12 rounded-lg"
           onSubmit={(e) => e.preventDefault()}
@@ -91,6 +99,7 @@ const SearchBarGpt = () => {
             type="text"
             className="col-span-9 p-4 m-2 rounded-lg"
             placeholder={lang[langKey]?.placeholderSearch}
+            onFocus={() => setShowSuggestions(true)}
           />
           <button
             onClick={handleSearchMoviesWithLanguage}
@@ -101,17 +110,36 @@ const SearchBarGpt = () => {
         </form>
       </div>
 
-      {suggestionList.length !== 0 && (
+      {showSuggestions && (
         <div className="flex justify-center ">
           <div
             className="w-full md:w-1/2 bg-gray-500 px-2 py-2 rounded-b-lg 
         "
           >
             {suggestionList?.map((suggestion: any) => (
-              <SearchSuggestion
-                suggestionName={suggestion}
-                listInSearch={setSuggestionListInSearch}
-              />
+              <div
+                onFocus={() => setShowSuggestions(true)}
+                onClick={() => handleSelectSuggestion(suggestion)}
+                className="flex items-center hover:shadow-lg py-2 cursor-pointer h-300"
+              >
+                <svg
+                  className="h-5 w-5 text-white ml-4 mr-2"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  {" "}
+                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                  <circle cx="10" cy="10" r="7" />{" "}
+                  <line x1="21" y1="21" x2="15" y2="15" />
+                </svg>
+                <p className="text-white text-lg">{suggestion}</p>
+              </div>
             ))}
           </div>
         </div>
