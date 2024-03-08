@@ -37,21 +37,21 @@ export const trendingSetApi = "https://api.themoviedb.org/3/trending/movie/";
 
 export const navItems = [
   {
-    id: 1,
+    _id: 1,
     link: "#",
     name: "Home",
     active: true,
   },
 
   {
-    id: 2,
+    _id: 2,
     link: "#schedule",
     name: "schedule",
     active: true,
   },
 
   {
-    id: 1,
+    _id: 1,
     link: "#blogs",
     name: "Blogs",
     active: true,

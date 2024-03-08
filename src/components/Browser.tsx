@@ -8,32 +8,24 @@ import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import SearchMovieResult from "./SearchMovieResult";
 import Schedule from "./scheduleComp/Schedule";
+import { useEffect, useState } from "react";
 
 const Browser = () => {
-  usePlayingMoviesNow();
-  const showGptSearch = useSelector((state: any) => state.gpt.showGptSearch);
-  const searchMovieResults = useSelector(
-    (state: any) => state.movies.searchMovieResult
-  );
-
+  const [scroll, setScroll] = useState(0);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.screenY);
+    });
+    return () => {
+      window.removeEventListener("scroll", () => {
+        setScroll(window.scrollY);
+      });
+    };
+  }, [scroll]);
   return (
     <div>
-      <Header />
-      {showGptSearch ? (
-        <GptSearchPage />
-      ) : (
-        <>
-          {searchMovieResults ? (
-            <SearchMovieResult />
-          ) : (
-            <>
-              <MovieDetailsTrailer />
-              <ListOfmovies />
-              <Schedule />
-            </>
-          )}
-        </>
-      )}
+      <Header scroll={scroll} />
+      <Outlet />
       <Footer />
     </div>
   );

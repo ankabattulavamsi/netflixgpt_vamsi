@@ -1,5 +1,3 @@
-import React from "react";
-
 const Footer = () => {
   return (
     <div className="bg-[#141414] pt-20 pb-6 pl-16">

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { options, trendingSetApi } from "../../utils/constants";
+import { MOVIES_API_KEY, options, trendingSetApi } from "../../utils/constants";
 import ScheduleMovies from "./ScheduleMovies";
 
 const Schedule = () => {
-  const [dayTrending, setDayTrending] = useState("day");
+  const [dayTrending, setDayTrending] = useState("week");
   const [trendingData, setTrendingData] = useState([]);
   useEffect(() => {
     fetchTrendingMovies();
-  }, []);
+  }, [dayTrending]);
 
   const fetchTrendingMovies = async () => {
     const data = await fetch(
-      `https://api.themoviedb.org/3/trending/movie/${dayTrending}?language=en-US`,
+      `https://api.themoviedb.org/3/trending/movie/${dayTrending}?api_key=${MOVIES_API_KEY}`,
       options
     );
 
@@ -27,16 +27,16 @@ const Schedule = () => {
     setDayTrending("week");
   };
 
-  console.log("trending", dayTrending);
-
   return (
     <div className="px-10 bg-black">
       <div>
-        <h1 className="text-3xl py-4 text-white">Schedule</h1>
+        <h1 className="inline-block w-60 text-3xl py-4 after:mb-2 text-white after:block after:border-b-4 after:origin-center   hover:after:scale-x-100  after:border-red-500 ">
+          Trending Movies
+        </h1>
       </div>
       <div className="inline-flex rounded-md shadow-sm">
         <button
-          onChange={handleTrendingToday}
+          onClick={handleTrendingToday}
           type="button"
           className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
         >
@@ -44,7 +44,7 @@ const Schedule = () => {
         </button>
 
         <button
-          onChange={handleTrendingWeek}
+          onClick={handleTrendingWeek}
           type="button"
           className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
         >
@@ -53,9 +53,10 @@ const Schedule = () => {
       </div>
 
       <div className="flex flex-wrap">
-        {trendingData?.map((movie: any) => (
-          <ScheduleMovies movieData={movie} />
-        ))}
+        {trendingData &&
+          trendingData?.map((movie: any) => (
+            <ScheduleMovies movieData={movie} />
+          ))}
       </div>
     </div>
   );

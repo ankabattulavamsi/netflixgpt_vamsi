@@ -1,7 +1,9 @@
 import Browser from "./Browser";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from "./Login";
-import MovieDetailsPage from "./MovieDetailsPage";
+import BroseMovies from "./BroseMovies";
+import Schedule from "./scheduleComp/Schedule";
+import MovieDetailHomePage from "./movieDetailPages/MovieDetailHomePage";
 
 const Body = () => {
   const appStore = createBrowserRouter([
@@ -12,10 +14,20 @@ const Body = () => {
     {
       path: "/browse",
       element: <Browser />,
+      children: [
+        {
+          path: "/browse",
+          element: <BroseMovies />,
+        },
+        {
+          path: "/browse/:id",
+          element: <MovieDetailHomePage />,
+        },
+      ],
     },
     {
-      path: "/browse/:id",
-      element: <MovieDetailsPage />,
+      path: "/schedule",
+      element: <Schedule />,
     },
   ]);
 

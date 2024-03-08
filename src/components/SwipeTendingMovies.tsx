@@ -1,4 +1,9 @@
-import { Navigation, Pagination, EffectCoverflow } from "swiper/modules";
+import {
+  Navigation,
+  Pagination,
+  EffectCoverflow,
+  Autoplay,
+} from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -27,33 +32,25 @@ const SwipeTendingMovies = ({ movieSwipe, hadnleSetBackground }: any) => {
 
   return (
     <div
-      className="px-40 aspect-video pt-[35%] absolute flex items-center w-screen
-    mx-auto my-0"
+      className="px-36 aspect-video pt-[35%] absolute flex items-center w-screen
+    mx-auto "
     >
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
         loop={true}
-        // slidesPerView={'auto'}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 100,
-          modifier: 2.5,
-          slideShadows: true,
-        }}
-        pagination={{ el: ".swiper-pagination", clickable: true }}
-        navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-          //   clickable: true,
-        }}
-        modules={[EffectCoverflow, Navigation, Pagination]}
         // navigation
-        spaceBetween={10}
+        pagination={{
+          clickable: true,
+        }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        modules={[Autoplay, Pagination]}
         slidesPerView={5}
-        className="h-52 relative bg-opacity-50 border border-red-600 border-spacing-8"
+        className="h-52 w-screen relative shadow-2xl bg-slate-950 border border-slate-100"
       >
         {movieSwipe?.map((movie: any) => {
           return (
@@ -62,7 +59,7 @@ const SwipeTendingMovies = ({ movieSwipe, hadnleSetBackground }: any) => {
               onClick={() => handleSetTrailer(movie.id)}
             >
               <img
-                className="w-auto rounded-sm h-44"
+                className="w-auto rounded-sm h-52 px-2"
                 src={Movie_Logo_URL + movie?.backdrop_path}
                 alt="movie-logo"
               />
@@ -70,7 +67,7 @@ const SwipeTendingMovies = ({ movieSwipe, hadnleSetBackground }: any) => {
           );
         })}
 
-        <div
+        {/* <div
           className="slider-controler relative flex justify-center items-center bottom-8
   "
         >
@@ -110,7 +107,7 @@ const SwipeTendingMovies = ({ movieSwipe, hadnleSetBackground }: any) => {
             </svg>
           </div>
           <div className="swiper-pagination text-white !important"></div>
-        </div>
+        </div> */}
       </Swiper>
     </div>
   );

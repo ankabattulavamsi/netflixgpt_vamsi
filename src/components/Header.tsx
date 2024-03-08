@@ -9,14 +9,17 @@ import {
   Netflix_Logo,
   SUPPORTED_LANGUAGES,
   movieSearchAPI,
+  navItems,
 } from "../utils/constants";
 import { toggleGptSearchPage } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/langSlice";
 import { searchResultMovies } from "../utils/movieSlice";
 import useSpeechRecognition from "../Hooks/useSpeechRecognition";
 import NavItems from "./NavItems";
+import NavLinks from "./NavLinks";
 
-const Header = () => {
+const Header = ({ scroll }: any) => {
+  const [navList, setNavList] = useState(navItems);
   const [searchResult, setSearchResult] = useState("");
   const user = useSelector((store: any) => store?.user);
   const showGptSearch = useSelector((store: any) => store?.gpt?.showGptSearch);
@@ -86,9 +89,21 @@ const Header = () => {
 
     dispatch(searchResultMovies(json.results));
   };
+  const handleNavOnckick = (id: any) => {
+    const newNavList = navList.map((nav) => {
+      nav.active = false;
+      if (nav._id === id) nav.active = true;
+      return nav;
+    });
+    setNavList(newNavList);
+  };
 
   return (
-    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row ">
+    <div
+      className={`absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row ${
+        scroll > 100 ? "scrolled" : undefined
+      }`}
+    >
       <img className="w-36 mx-auto md:mx-0" src={Netflix_Logo} alt="img-logo" />
 
       {user && (
@@ -139,9 +154,11 @@ const Header = () => {
               {!showGptSearch && (
                 <>
                   {!isListening ? (
-                    <>
-                      <NavItems />
-                    </>
+                    <div className="flex justify-between w-full">
+                      {navList.map((nav) => (
+                        <NavLinks navItem={nav} navOnclick={handleNavOnckick} />
+                      ))}
+                    </div>
                   ) : (
                     <p className="text-white">
                       Your broser currently listening
