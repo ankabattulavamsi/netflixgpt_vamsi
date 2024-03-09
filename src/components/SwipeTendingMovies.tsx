@@ -49,7 +49,7 @@ const SwipeTendingMovies = ({ movieSwipe, hadnleSetBackground }: any) => {
           disableOnInteraction: false,
         }}
         modules={[Autoplay, Pagination]}
-        slidesPerView={5}
+        slidesPerView={4}
         className="h-52 w-screen relative shadow-2xl bg-slate-950 border border-slate-100"
       >
         {movieSwipe?.map((movie: any) => {

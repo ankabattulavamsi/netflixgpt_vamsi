@@ -17,6 +17,7 @@ const MovieDescription = ({
   const [showModal, setShowModal] = useState(false);
   const onHandleSetShow = () => {
     setShowModal(false);
+    videoId = "";
   };
   return (
     <div className="py-8 ">

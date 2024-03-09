@@ -23,7 +23,6 @@ const MovieDetailHomePage = () => {
     return () => clearInterval(timer);
   }, []);
 
-  console.log("movieDetails", movieDetails);
   if (!movieDetails) return null;
 
   const {

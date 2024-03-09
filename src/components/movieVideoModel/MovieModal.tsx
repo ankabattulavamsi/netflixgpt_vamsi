@@ -1,7 +1,5 @@
 import { Modal } from "@mui/material";
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import useVideoTrailer from "../../Hooks/userVideoTrailer";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { movieTrailerPlay } from "../../utils/movieSlice";
 import { options } from "../../utils/constants";
@@ -29,11 +27,10 @@ const MovieModal = ({ showModal, handleSetShow, videoId }: any) => {
       (trailer: any) => trailer?.type == "Trailer"
     );
     const movieTrailer = filterMovie.length ? filterMovie[0] : json.results[0];
-    console.log("movieTrailer-each-data", movieTrailer);
+
     dispatch(movieTrailerPlay(movieTrailer));
   };
 
-  console.log("video-id", videoKey && videoKey);
   return (
     <Modal
       open={showModal}

@@ -5,6 +5,7 @@ import { movieTrailerPlay } from "../utils/movieSlice";
 
 const useVideoTrailer = (movieId: any) => {
   const dispatch = useDispatch();
+
   // const videoTrailer = useSelector(
   //   (state: any) => state?.movies?.moviesTrailer
   // );
