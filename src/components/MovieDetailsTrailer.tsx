@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MovieTitleAndDetails from "./MovieTitleAndDetails";
 import MovieVideoBackground from "./MovieVideoBackground";
 import { useSelector } from "react-redux";
@@ -6,31 +6,35 @@ import SwipeTendingMovies from "./SwipeTendingMovies";
 
 const MovieDetailsTrailer = () => {
   const [isActive, setIsActive] = useState<any>([]);
+  const [randomNum, setRanomNum] = useState<any>(0);
+
+  useEffect(() => {
+    const min = 0;
+    const max = 20;
+    const ramNum = min + Math.random() * (max - min);
+    setRanomNum(ramNum.toString().split(".")[0]);
+  }, [randomNum]);
+
   const movies = useSelector((state: any) => state?.movies.topMovies);
 
   if (movies === null) {
     return null;
   }
 
-  const movieDetails = movies[1];
-  const { original_title, overview, id } = movieDetails;
-
-  const handleChangeTrailer = (movieId: any) => {
-    const eachMovieId = movies?.filter((movie: any) => movie.id === movieId);
-    setIsActive(eachMovieId);
-  };
+  const movieDetails = movies[randomNum];
+  const { original_title, overview, id, backdrop_path } = movieDetails;
 
   return (
-    <div className=" bg-black md:pt-0">
-      <SwipeTendingMovies
-        movieSwipe={movies}
-        hadnleSetBackground={handleChangeTrailer}
-      />
+    <div className=" bg-black pt-[35%] md:pt-0">
+      <div className="hidden md:inline-block">
+        <SwipeTendingMovies />
+      </div>
       <MovieTitleAndDetails
-        title={isActive[0]?.original_title}
-        review={isActive[0]?.overview}
+        title={original_title}
+        review={overview}
+        trailId={id}
       />
-      <MovieVideoBackground movieId={id} />
+      <MovieVideoBackground moviePoster={id} />
     </div>
   );
 };

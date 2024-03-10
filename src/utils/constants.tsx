@@ -36,24 +36,7 @@ export const trendingSetApi = "https://api.themoviedb.org/3/trending/movie/";
 // "https://api.themoviedb.org/3/search/movie?query=hindi&api_key=";
 
 export const navItems = [
-  {
-    _id: 1,
-    link: "#",
-    name: "Home",
-    active: true,
-  },
-
-  {
-    _id: 2,
-    link: "#schedule",
-    name: "schedule",
-    active: true,
-  },
-
-  {
-    _id: 1,
-    link: "#blogs",
-    name: "Blogs",
-    active: true,
-  },
+  { id: 1, path: "#home", title: "Home" },
+  { id: 2, path: "#schedule", title: "Schedule" },
+  { id: 3, path: "#blogs", title: "Popular Movies" },
 ];

@@ -2,43 +2,61 @@ import React, { useState } from "react";
 import { movieDetailsListIcons } from "../../helper/helper";
 import { Modal } from "@mui/material";
 import MovieModal from "../movieVideoModel/MovieModal";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import useMovieDetails from "../../Hooks/useMovieDetails";
 
-const MovieDescription = ({
-  title,
-  releaseDate,
-  originalLanguage,
-  runtime,
-  tagline,
-  overview,
-  genres,
-  voteAverage,
-  videoId,
-}: any) => {
+const MovieDescription = () => {
   const [showModal, setShowModal] = useState(false);
-  const onHandleSetShow = () => {
+  const { id } = useParams();
+  const movieDetails = useSelector((state: any) => state?.movies?.movieDetails);
+
+  const {
+    backdrop_path,
+    poster_path,
+    original_title,
+    release_date,
+    original_language,
+    runtime,
+    tagline,
+    overview,
+    genres,
+    vote_average,
+  } = movieDetails;
+
+  useMovieDetails(id);
+  const onHandleSetShow = (id: any) => {
     setShowModal(false);
-    videoId = "";
+    id = "";
   };
+
+  if (!movieDetails) return null;
+
   return (
-    <div className="py-8 ">
+    <div className="py-8">
       <div>
-        <h1 className="text-white text-5xl font-semibold">{title}</h1>
+        <h1 className="text-white text-3xl md:text-5xl font-semibold">
+          {original_title}
+        </h1>
       </div>
-      <div className="flex pt-2">
-        <h3 className="text-white">
-          {releaseDate}
-          <span className="ml-1">({originalLanguage})</span>
-        </h3>
-        <ul className="flex justify-between">
-          {genres.map((each: any) => (
-            <li className="text-white px-1"> {each.name}, </li>
+      <div className="flex pt-2 justify-between md:justify-start">
+        <p className="text-white">
+          {release_date}
+          <span className="ml-1">({original_language})</span>
+        </p>
+        <ul className="ml-2 flex flex-col md:flex-row justify-between">
+          {genres.map((each: any, index: number) => (
+            <li key={each.id} className="text-white px-1">
+              {" "}
+              {each.name},{" "}
+            </li>
           ))}
         </ul>
-        <h3 className="text-white ml-4">{runtime}min</h3>
+        <h3 className="text-white md:ml-4">{runtime}min</h3>
       </div>
 
-      <div className="py-4 flex">
-        <div className="flex items-center mr-4">
+      <div className="py-4 flex flex-col md:flex-row items-center gap-4">
+        <div className="flex items-center mr-0 md:mr-4">
           <div className="relative size-16">
             <svg
               className="size-full"
@@ -66,14 +84,14 @@ const MovieDescription = ({
                   className="stroke-current text-blue-600 dark:text-blue-500"
                   stroke-width="1"
                   stroke-dasharray="100"
-                  stroke-dashoffset={voteAverage * 10.0}
+                  stroke-dashoffset={vote_average * 10.0}
                 ></circle>
               </g>
             </svg>
             {/* <!-- Percentage Text --> */}
             <div className="absolute top-1/2 start-1/2 transform -translate-y-1/2 -translate-x-1/2 ">
               <span className="text-center text-2xl font-bold text-white dark:text-white ">
-                {(voteAverage * 10).toString().split(".")[0]}%
+                {(vote_average * 10).toString().split(".")[0]}%
               </span>
             </div>
           </div>
@@ -82,9 +100,12 @@ const MovieDescription = ({
           </h1>
         </div>
 
-        <ul className="flex items-center justify-between">
+        <ul className="flex items-center justify-center ml-16 md:ml-0">
           {movieDetailsListIcons?.map((each: any) => (
-            <div className="bg-[#172554] px-4 py-4 rounded-full mx-4">
+            <div
+              key={each.id}
+              className="bg-[#172554] px-4 py-4 rounded-full mx-4"
+            >
               {each.svgIcon}
             </div>
           ))}
@@ -114,14 +135,14 @@ const MovieDescription = ({
         <p className="text-stone-400 ">{tagline}</p>
       </div>
 
-      <div className="">
+      <div className="w-full">
         <h1 className="text-2xl tracking-wider leading-loose text-white">
           Overview
         </h1>
-        <p className="text-white font-serif">{overview}</p>
+        <p className="text-white font-serif w-full">{overview}</p>
       </div>
       <MovieModal
-        videoId={videoId}
+        videoId={id}
         showModal={showModal}
         handleSetShow={onHandleSetShow}
       />

@@ -29,19 +29,19 @@ const Schedule = () => {
 
   return (
     <div className="px-10 bg-black">
-      <div>
+      <div className="flex md:justify-start justify-center">
         <h1 className="inline-block w-60 text-3xl py-4 after:mb-2 text-white after:block after:border-b-4 after:origin-center   hover:after:scale-x-100  after:border-red-500 ">
           Trending Movies
         </h1>
       </div>
-      <div className="inline-flex rounded-md shadow-sm">
+      <div className="w-full">
         <button
           onClick={handleTrendingToday}
           type="button"
           className={`${
             dayTrending === "day"
-              ? "px-6 py-3 text-sm font-medium text-white bg-red-600 border border-white rounded-s-lg "
-              : "px-6 py-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg"
+              ? "w-6/12 md:w-32 px-6 py-3 text-sm font-medium text-white bg-red-600 border border-white rounded-s-lg "
+              : "w-6/12 md:w-32 px-6 py-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg"
           }`}
         >
           Today
@@ -52,18 +52,18 @@ const Schedule = () => {
           type="button"
           className={`${
             dayTrending === "week"
-              ? "px-6 py-3 text-sm font-medium text-white bg-red-600 border border-white rounded-e-lg "
-              : "px-6 py-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg"
+              ? "w-6/12 md:w-32 px-6 py-3 text-sm font-medium text-white bg-red-600 border border-white rounded-e-lg "
+              : "w-6/12 md:w-32 px-6 py-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg"
           }`}
         >
           This Week
         </button>
       </div>
 
-      <div className="flex flex-wrap">
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
         {trendingData &&
           trendingData?.map((movie: any) => (
-            <ScheduleMovies movieData={movie} />
+            <ScheduleMovies key={movie.id} movieData={movie} />
           ))}
       </div>
     </div>

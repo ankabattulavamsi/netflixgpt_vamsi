@@ -22,12 +22,20 @@ const BroseMovies = () => {
       ) : (
         <>
           {searchMovieResults ? (
-            <SearchMovieResult />
+            <div id="home">
+              <SearchMovieResult />
+            </div>
           ) : (
             <>
-              <MovieDetailsTrailer />
-              <Schedule />
-              <ListOfmovies />
+              <div id="home">
+                <MovieDetailsTrailer />
+              </div>
+              <div id="schedule">
+                <Schedule />
+              </div>
+              <div id="blogs">
+                <ListOfmovies />
+              </div>
             </>
           )}
         </>

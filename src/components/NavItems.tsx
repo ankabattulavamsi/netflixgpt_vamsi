@@ -6,7 +6,7 @@ const NavItems = () => {
   return (
     <div className="flex justify-between w-full">
       {navItems.map((nav) => (
-        <NavLinks navItem={nav} />
+        <NavLinks key={nav.id} navItem={nav} />
       ))}
     </div>
   );

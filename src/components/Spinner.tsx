@@ -8,6 +8,7 @@ const Spinner = () => {
     <div className="fixed top-0 pt-10 left-0 right-0 bottom-0 flex justify-center items-center bg-opacity-80 bg-black flex-wrap">
       {movieTitle?.map((each: any) => (
         <div
+          key={each.title}
           role="status"
           className="mx-4 bg-zinc-700 w-56 h-36 rounded-lg animate-pulse dark:bg-gray-700"
         >

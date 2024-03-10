@@ -10,7 +10,7 @@ const NavLinks = ({ navItem, navOnclick }: any) => {
           navItem.active ? "active" : undefined
         }`}
       >
-        {navItem.name}
+        {navItem.title}
       </a>
     </div>
   );

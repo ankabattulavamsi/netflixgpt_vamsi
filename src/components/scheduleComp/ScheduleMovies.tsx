@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Movie_Logo_URL } from "../../utils/constants";
 import { Link } from "react-router-dom";
+import MovieModal from "../movieVideoModel/MovieModal";
 
 const ScheduleMovies = ({ movieData }: any) => {
+  const [showModal, setShowModal] = useState(false);
   const handleMovieDetailPage = (id: any) => {};
-
+  const onHandleSetShow = () => {
+    setShowModal(false);
+    movieData.id = "";
+  };
   return (
-    <Link to={`/browse/${movieData?.id}`}>
-      <div className="p-2 py-4 flex-2 relative group/item">
-        <img
-          src={Movie_Logo_URL + movieData?.poster_path}
-          alt="trending"
-          className="w-52 group-hover/item:opacity-30 group-hover/item:transition-all  group-hover/item:duration-500 group-hover/item:ease-in-out"
-        />
+    <>
+      <div className="p-0 py-2 md:p-2 md:py-4 relative group/item">
+        <Link to={`/browse/${movieData?.id}`}>
+          <img
+            src={Movie_Logo_URL + movieData?.poster_path}
+            alt="trending"
+            className="w-52 group-hover/item:opacity-30 group-hover/item:transition-all  group-hover/item:duration-500 group-hover/item:ease-in-out"
+          />
+        </Link>
         <div className="w-full absolute flex flex-col items-center top-20 group/edit invisible  group-hover/item:visible group/edit:transition-all  group/edit:duration-500 group/edit:ease-in-out">
           <div className="">
             <p className="inline-block text-lg text-white visited:text-slate-400 hover:text-slate-400 after:block  after:scale-x-100 after:border-b-4 after:transition-all after:duration-500 after:ease-in-out  hover:after:border-red-500">
@@ -35,6 +42,7 @@ const ScheduleMovies = ({ movieData }: any) => {
               <line x1="8" y1="12" x2="16" y2="12" />
             </svg>
             <svg
+              onClick={() => setShowModal(true)}
               className="h-14 w-14 text-red-500 cursor-pointer"
               viewBox="0 0 24 24"
               fill="none"
@@ -50,7 +58,12 @@ const ScheduleMovies = ({ movieData }: any) => {
           </div>
         </div>
       </div>
-    </Link>
+      <MovieModal
+        videoId={movieData?.id}
+        showModal={showModal}
+        handleSetShow={onHandleSetShow}
+      />
+    </>
   );
 };
 

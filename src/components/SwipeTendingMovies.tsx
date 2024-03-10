@@ -20,13 +20,23 @@ import { Movie_Logo_URL } from "../utils/constants";
 import { movieTrailerPlay, topMoviesDetails } from "../utils/movieSlice";
 
 const SwipeTendingMovies = ({ movieSwipe, hadnleSetBackground }: any) => {
-  useTopRatedMovies();
   const dispatch = useDispatch();
+
+  const movies = useSelector((state: any) => state?.movies.topMovies);
+  useTopRatedMovies();
+  if (movies === null) {
+    return null;
+  }
 
   //   const movies = useSelector((state: any) => state?.movies.topMovies);
 
+  const handleChangeTrailer = (movieId: any) => {
+    const eachMovieId = movies?.filter((movie: any) => movie.id === movieId);
+    // setIsActive(eachMovieId);
+  };
+
   const handleSetTrailer = (movieTrailer: any) => {
-    hadnleSetBackground(movieTrailer);
+    // hadnleSetBackground(movieTrailer);
     dispatch(topMoviesDetails(movieTrailer));
   };
 
@@ -52,9 +62,10 @@ const SwipeTendingMovies = ({ movieSwipe, hadnleSetBackground }: any) => {
         slidesPerView={4}
         className="h-52 w-screen relative shadow-2xl bg-slate-950 border border-slate-100"
       >
-        {movieSwipe?.map((movie: any) => {
+        {movies?.map((movie: any) => {
           return (
             <SwiperSlide
+              key={movie.id}
               className="h-64"
               onClick={() => handleSetTrailer(movie.id)}
             >

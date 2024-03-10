@@ -6,7 +6,6 @@ import RecommentdationList from "./RecommentdationList";
 const Recommendations = () => {
   const [recomData, setRecomData] = useState([]);
   const { id } = useParams();
-  console.log(id);
 
   useEffect(() => {
     fetchRecomMovies();
@@ -19,20 +18,25 @@ const Recommendations = () => {
     );
     const json = await data.json();
     setRecomData(json?.results);
-    console.log("============", json.results);
   };
 
   return (
     <div className="px-8 py-6">
       <h1 className="text-white text-3xl font-semibold ">Recommendations</h1>
-      <div className="flex overflow-x-scroll">
-        <div className="flex">
-          {recomData &&
-            recomData?.map((rec: any) => (
-              <RecommentdationList key={rec.id} recomMovie={rec} />
-            ))}
+      {recomData.length !== 0 ? (
+        <div className="flex overflow-x-scroll">
+          <div className="flex">
+            {recomData &&
+              recomData?.map((rec: any) => (
+                <RecommentdationList key={rec.id} recomMovie={rec} />
+              ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="flex justify-center pt-4">
+          <p className="text-white text-lg">No Recommended Movies here...</p>
+        </div>
+      )}
     </div>
   );
 };

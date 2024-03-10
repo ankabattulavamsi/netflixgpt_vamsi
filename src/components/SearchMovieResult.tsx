@@ -7,9 +7,11 @@ const SearchMovieResult = () => {
   const searchResults = useSelector(
     (state: any) => state.movies.searchMovieResult
   );
+
+  console.log("searchResults", searchResults);
   return (
-    <div className="px-10 md:px-6 text-white bg-black pt-20">
-      <h1 className="text-lg md:text-2xl py-6">Search Results</h1>
+    <div className="px-6 md:px-6 text-white bg-black pt-44 md:pt-20">
+      <h1 className="text-2xl py-6">Search Results</h1>
       <div>
         {searchResults.length === 0 ? (
           <div className="flex justify-center">
@@ -18,7 +20,7 @@ const SearchMovieResult = () => {
             </h1>
           </div>
         ) : (
-          <div className="flex  flex-wrap">
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
             {searchResults?.map((movie: any) => {
               return (
                 <SearchMovieResults

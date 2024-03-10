@@ -25,6 +25,7 @@ const GptSearchPage = () => {
           <div className="flex flex-wrap px-6 py-20">
             {a.map((each: any) => (
               <div
+                key={each}
                 role="status"
                 className="mx-4 bg-zinc-700 w-56 h-36 rounded-lg animate-pulse dark:bg-gray-700"
               >

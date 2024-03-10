@@ -118,6 +118,7 @@ const SearchBarGpt = () => {
           >
             {suggestionList?.map((suggestion: any) => (
               <div
+                key={suggestion.id}
                 onFocus={() => setShowSuggestions(true)}
                 onClick={() => handleSelectSuggestion(suggestion)}
                 className="flex items-center hover:shadow-lg py-2 cursor-pointer h-300"
