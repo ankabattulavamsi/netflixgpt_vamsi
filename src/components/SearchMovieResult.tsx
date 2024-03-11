@@ -1,6 +1,4 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import CardMovie from "./CardMovie";
 import SearchMovieResults from "./SearchMovieResults";
 
 const SearchMovieResult = () => {
@@ -8,7 +6,6 @@ const SearchMovieResult = () => {
     (state: any) => state.movies.searchMovieResult
   );
 
-  console.log("searchResults", searchResults);
   return (
     <div className="px-6 md:px-6 text-white bg-black pt-44 md:pt-20">
       <h1 className="text-2xl py-6">Search Results</h1>

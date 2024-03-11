@@ -12,8 +12,6 @@ const MovieDescription = () => {
   const movieDetails = useSelector((state: any) => state?.movies?.movieDetails);
 
   const {
-    backdrop_path,
-    poster_path,
     original_title,
     release_date,
     original_language,

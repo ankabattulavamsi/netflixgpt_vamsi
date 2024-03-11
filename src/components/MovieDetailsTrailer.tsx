@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MovieTitleAndDetails from "./MovieTitleAndDetails";
 import MovieVideoBackground from "./MovieVideoBackground";
 import { useSelector } from "react-redux";
 import SwipeTendingMovies from "./SwipeTendingMovies";
 
 const MovieDetailsTrailer = () => {
-  const [isActive, setIsActive] = useState<any>([]);
   const [randomNum, setRanomNum] = useState<any>(0);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ const MovieDetailsTrailer = () => {
   }
 
   const movieDetails = movies[randomNum];
-  const { original_title, overview, id, backdrop_path } = movieDetails;
+  const { original_title, overview, id } = movieDetails;
 
   return (
     <div className=" bg-black pt-[35%] md:pt-0">

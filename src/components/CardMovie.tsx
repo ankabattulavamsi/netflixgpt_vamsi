@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Movie_Logo_URL, Photot_Url } from "../utils/constants";
+import { useState } from "react";
+import { Movie_Logo_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import MovieModal from "./movieVideoModel/MovieModal";
 

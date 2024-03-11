@@ -1,8 +1,7 @@
-import React from "react";
 import { useSelector } from "react-redux";
 
 const Spinner = () => {
-  const { movieTitle, moviesResult } = useSelector((store: any) => store?.gpt);
+  const { movieTitle } = useSelector((store: any) => store?.gpt);
 
   return (
     <div className="fixed top-0 pt-10 left-0 right-0 bottom-0 flex justify-center items-center bg-opacity-80 bg-black flex-wrap">

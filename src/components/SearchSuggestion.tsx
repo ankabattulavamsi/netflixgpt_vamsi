@@ -1,5 +1,3 @@
-import React from "react";
-
 const SearchSuggestion = (props: any) => {
   const { suggestionName, listInSearch } = props;
   return (

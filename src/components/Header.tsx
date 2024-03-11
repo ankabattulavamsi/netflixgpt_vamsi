@@ -1,5 +1,5 @@
 import { onAuthStateChanged, signOut } from "@firebase/auth";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
@@ -15,8 +15,7 @@ import { toggleGptSearchPage } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/langSlice";
 import { searchResultMovies } from "../utils/movieSlice";
 import useSpeechRecognition from "../Hooks/useSpeechRecognition";
-import NavItems from "./NavItems";
-import NavLinks from "./NavLinks";
+import { Link } from "react-router-dom";
 
 const Header = ({ scroll }: any) => {
   const [activeLink, setActiveLink] = useState("Home");
@@ -35,13 +34,8 @@ const Header = ({ scroll }: any) => {
         // An error happened.
       });
   };
-  const {
-    text,
-    isListening,
-    startListening,
-    stopListening,
-    hasRecognitionSupport,
-  } = useSpeechRecognition();
+  const { text, isListening, startListening, hasRecognitionSupport } =
+    useSpeechRecognition();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -90,14 +84,6 @@ const Header = ({ scroll }: any) => {
 
     dispatch(searchResultMovies(json.results));
   };
-  const handleNavOnckick = (id: any) => {
-    const newNavList = navList.map((nav) => {
-      // nav.active = false;
-      // if (nav._id === id) nav.active = true;
-      return nav;
-    });
-    setNavList(newNavList);
-  };
 
   return (
     <div
@@ -105,11 +91,13 @@ const Header = ({ scroll }: any) => {
         scroll > 100 ? "scrolled" : undefined
       }`}
     >
-      <img
-        className="hidden md:inline-block w-36 mx-auto md:mx-0"
-        src={Netflix_Logo}
-        alt="img-logo"
-      />
+      <Link to="/browse">
+        <img
+          className="hidden md:inline-block w-36 mx-auto md:mx-0"
+          src={Netflix_Logo}
+          alt="img-logo"
+        />
+      </Link>
 
       {user && (
         <div className="-mx-6 gap-6 md:gap-0 md:mx-0  md:flex w-screen flex flex-col-reverse md:flex-row justify-between items-center md:items-center ">
@@ -159,7 +147,11 @@ const Header = ({ scroll }: any) => {
                   <div className="flex justify-between w-full">
                     {navList.map((nav) => (
                       <a
-                        className="text-white"
+                        className={`${
+                          activeLink === nav.title
+                            ? "text-red-700 font-medium"
+                            : "text-white"
+                        }`}
                         href={nav.path}
                         onClick={() => setActiveLink(nav.title)}
                       >

@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/LanguageConstants";
 import openai from "../utils/openai";
 import { options } from "../utils/constants";
 import { getMoviesResult } from "../utils/gptSlice";
 import Spinner from "./Spinner";
-import SearchSuggestion from "./SearchSuggestion";
-import { current } from "@reduxjs/toolkit";
 
 const SearchBarGpt = () => {
   const [isLoading, setIsLoading] = useState(false);

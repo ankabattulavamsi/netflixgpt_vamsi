@@ -1,4 +1,3 @@
-import React from "react";
 import CardsOfMovies from "./CardsOfMovies";
 import usePlayingMoviesNow from "../Hooks/usePlayingMoviesNow";
 import { useSelector } from "react-redux";

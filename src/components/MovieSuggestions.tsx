@@ -1,7 +1,5 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import CardsOfMovies from "./CardsOfMovies";
-import Spinner from "./Spinner";
 
 const MovieSuggestions = () => {
   const { movieTitle, moviesResult } = useSelector((store: any) => store?.gpt);

@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Movie_Logo_URL } from "../../utils/constants";
 import { Link } from "react-router-dom";
 import MovieModal from "../movieVideoModel/MovieModal";
 
 const ScheduleMovies = ({ movieData }: any) => {
   const [showModal, setShowModal] = useState(false);
-  const handleMovieDetailPage = (id: any) => {};
   const onHandleSetShow = () => {
     setShowModal(false);
-    movieData.id = "";
+    // movieData.id = "";
   };
   return (
     <>

@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import Spinner from "../Spinner";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useMovieDetails from "../../Hooks/useMovieDetails";

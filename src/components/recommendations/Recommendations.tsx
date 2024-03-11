@@ -1,33 +1,27 @@
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { options } from "../../utils/constants";
 import RecommentdationList from "./RecommentdationList";
+import { useSelector } from "react-redux";
+import useRecommendations from "../../Hooks/useRecommendations";
 
 const Recommendations = () => {
-  const [recomData, setRecomData] = useState([]);
   const { id } = useParams();
 
-  useEffect(() => {
-    fetchRecomMovies();
-  }, []);
+  const recomMovies = useSelector(
+    (store: any) => store.movies.recommendedMovies
+  );
 
-  const fetchRecomMovies = async () => {
-    const data = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US&page=1`,
-      options
-    );
-    const json = await data.json();
-    setRecomData(json?.results);
-  };
+  useRecommendations(id);
+
+  if (!recomMovies) return null;
 
   return (
     <div className="px-8 py-6">
       <h1 className="text-white text-3xl font-semibold ">Recommendations</h1>
-      {recomData.length !== 0 ? (
+      {recomMovies.length !== 0 ? (
         <div className="flex overflow-x-scroll">
           <div className="flex">
-            {recomData &&
-              recomData?.map((rec: any) => (
+            {recomMovies &&
+              recomMovies?.map((rec: any) => (
                 <RecommentdationList key={rec.id} recomMovie={rec} />
               ))}
           </div>

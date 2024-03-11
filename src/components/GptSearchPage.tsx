@@ -1,10 +1,7 @@
-import React from "react";
 import SearchBarGpt from "./SearchBarGpt";
 import { Background_Image_URL } from "../utils/constants";
 import MovieSuggestions from "./MovieSuggestions";
 import { useSelector } from "react-redux";
-import CardsOfMovies from "./CardsOfMovies";
-import Spinner from "./Spinner";
 
 const GptSearchPage = () => {
   const { movieTitle, moviesResult } = useSelector((store: any) => store?.gpt);

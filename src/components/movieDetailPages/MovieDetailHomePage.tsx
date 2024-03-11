@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
 import Spinner from "../Spinner";
-import useMovieDetails from "../../Hooks/useMovieDetails";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { Movie_Logo_URL } from "../../utils/constants";
-import MovieDetailsBanner from "./MovieDetailsBanner";
-import MovieDescription from "./MovieDescription";
 import Recommendations from "../recommendations/Recommendations";
 import SimilarMovies from "../similarMovieList/SimilarMovies";
 import MovieBanner from "./MovieBanner";

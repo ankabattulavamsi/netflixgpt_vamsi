@@ -1,9 +1,4 @@
-import {
-  Navigation,
-  Pagination,
-  EffectCoverflow,
-  Autoplay,
-} from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -17,9 +12,9 @@ import "swiper/css/scrollbar";
 import useTopRatedMovies from "../Hooks/useTopRatedMovies";
 import { useDispatch, useSelector } from "react-redux";
 import { Movie_Logo_URL } from "../utils/constants";
-import { movieTrailerPlay, topMoviesDetails } from "../utils/movieSlice";
+import { topMoviesDetails } from "../utils/movieSlice";
 
-const SwipeTendingMovies = ({ movieSwipe, hadnleSetBackground }: any) => {
+const SwipeTendingMovies = () => {
   const dispatch = useDispatch();
 
   const movies = useSelector((state: any) => state?.movies.topMovies);
@@ -29,11 +24,6 @@ const SwipeTendingMovies = ({ movieSwipe, hadnleSetBackground }: any) => {
   }
 
   //   const movies = useSelector((state: any) => state?.movies.topMovies);
-
-  const handleChangeTrailer = (movieId: any) => {
-    const eachMovieId = movies?.filter((movie: any) => movie.id === movieId);
-    // setIsActive(eachMovieId);
-  };
 
   const handleSetTrailer = (movieTrailer: any) => {
     // hadnleSetBackground(movieTrailer);
@@ -77,48 +67,6 @@ const SwipeTendingMovies = ({ movieSwipe, hadnleSetBackground }: any) => {
             </SwiperSlide>
           );
         })}
-
-        {/* <div
-          className="slider-controler relative flex justify-center items-center bottom-8
-  "
-        >
-          <div
-            className="left-80 transform translate-x-72 !important swiper-button-prev slider-arrow .swiper-slide-shadow-left,
-                        .swiper-slide-shadow-right none"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"
-              />
-            </svg>
-          </div>
-          <div className="swiper-button-next slider-arrow transform -translate-x-80  right-80 text-white !important">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-2 h-2 text-white"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </div>
-          <div className="swiper-pagination text-white !important"></div>
-        </div> */}
       </Swiper>
     </div>
   );

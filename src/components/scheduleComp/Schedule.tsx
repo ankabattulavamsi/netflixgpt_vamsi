@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { MOVIES_API_KEY, options, trendingSetApi } from "../../utils/constants";
+import { useEffect, useState } from "react";
+import { MOVIES_API_KEY, options } from "../../utils/constants";
 import ScheduleMovies from "./ScheduleMovies";
+import { useDispatch, useSelector } from "react-redux";
+import { trendingMoviesList } from "../../utils/movieSlice";
 
 const Schedule = () => {
   const [dayTrending, setDayTrending] = useState("day");
-  const [trendingData, setTrendingData] = useState([]);
+  const dispatch = useDispatch();
+  const trendMovies = useSelector(
+    (store: any) => store?.movies?.trendingMovies
+  );
+
   useEffect(() => {
     fetchTrendingMovies();
   }, [dayTrending]);
@@ -16,7 +22,7 @@ const Schedule = () => {
     );
 
     const json = await data.json();
-    setTrendingData(json?.results);
+    dispatch(trendingMoviesList(json?.results));
   };
 
   const handleTrendingToday = () => {
@@ -61,8 +67,8 @@ const Schedule = () => {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-        {trendingData &&
-          trendingData?.map((movie: any) => (
+        {trendMovies &&
+          trendMovies?.map((movie: any) => (
             <ScheduleMovies key={movie.id} movieData={movie} />
           ))}
       </div>

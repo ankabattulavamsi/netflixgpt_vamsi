@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Movie_Logo_URL } from "../utils/constants";
 import MovieModal from "./movieVideoModel/MovieModal";

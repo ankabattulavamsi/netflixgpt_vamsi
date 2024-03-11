@@ -1,4 +1,3 @@
-import React from "react";
 import { Movie_Logo_URL } from "../../utils/constants";
 import { recomMovieIcons } from "../../helper/helper";
 import { Link } from "react-router-dom";

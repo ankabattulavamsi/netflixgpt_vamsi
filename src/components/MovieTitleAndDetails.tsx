@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+
 import MovieModal from "./movieVideoModel/MovieModal";
 
 const MovieTitleAndDetails = ({ title, review, trailId }: any) => {

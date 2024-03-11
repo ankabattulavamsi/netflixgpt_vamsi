@@ -14,7 +14,7 @@ const MovieModal = ({ showModal, handleSetShow, videoId }: any) => {
 
   useEffect(() => {
     !videoTrailer && fetchVideoTrailer();
-  }, []);
+  }, [videoId]);
 
   const fetchVideoTrailer = async () => {
     const data = await fetch(
@@ -24,7 +24,7 @@ const MovieModal = ({ showModal, handleSetShow, videoId }: any) => {
 
     const json = await data.json();
     const filterMovie = json?.results?.filter(
-      (trailer: any) => trailer?.type == "Trailer"
+      (trailer: any) => trailer?.type === "Trailer"
     );
     const movieTrailer = filterMovie.length ? filterMovie[0] : json.results[0];
 
